@@ -1,0 +1,42 @@
+.thumbnail-container
+{
+  padding: 0 10px 0 0;
+  text-align: center;
+  float: left;
+}
+    
+.thumbnailColumn
+{
+  float: left;
+  margin-right: 10px;
+}
+    
+.thumbnail
+{
+  width: 60px;
+  height: 60px;
+  border: 1px solid white;
+}
+    
+.detailsColumn
+{
+  overflow: hidden;
+}
+    
+.tweet div
+{
+  font-size: 18px;
+}
+    
+.tweet .author
+{
+  font-weight:bold;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+    
+.tweet .time
+{
+  color: #666;
+  margin-top: 10px;
+}

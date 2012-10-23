@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Twitter Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- required libraries -->
+  <link rel="stylesheet" href="lib/jquery.mobile-1.2.0.min.css" />
+  <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript" src="lib/jquery.mobile-1.2.0.min.js"></script>
+  <script type="text/javascript" src="lib/jquery.jsonp-2.1.4.min.js"></script>
+  <script type="text/javascript" src="lib/knockout-2.2.0rc.debug.js"></script>
+  <script type="text/javascript" src="lib/iscroll.js"></script>
+  <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
+
+  <!-- the various view models -->
+  <script type="text/javascript" src="viewModel/TweetViewModel.js"></script>
+  <script type="text/javascript" src="viewModel/TwitterSearchService.js"></script>
+  <script type="text/javascript" src="viewModel/TwitterSearchViewModel.js"></script>
+  <script type="text/javascript" src="viewModel/SearchResultsViewModel.js"></script>
+  
+  <!-- the code that puts it all together -->
+  <script type="text/javascript" src="app.js" ></script>
+  
+  <!-- some simple styling for the twitter view -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ### A page that renders the TwitterSearchViewModel -->
+  <div data-role="page" data-theme="b"
+        id="twitterSearchView">
+    <div data-role="header" data-theme="b">
+      <h1>Twitter Search</h1>
+    </div>
+    <div data-role="content" data-theme="c">
+      <div>
+        <!-- search form -->
+        <form>
+          <input type="search" name="search"
+                  data-bind="value: searchTerm, valueUpdate: 'afterkeydown'" />
+          <input type="button" value="Go"
+                  data-bind="enable: searchTerm().length > 0 && isSearching() == false,
+                             click: search" />
+        </form>
+
+        <p class="userMessage" data-bind="visible:isSearching()">
+          Loading ...
+        </p>
+
+        <p class="userMessage" data-bind="text:userMessage" />
+
+        <!-- recent searches -->
+        <h3 data-bind="visible: recentSearches().length > 0">Recent Searches</h3>
+        <ul data-role="listview"
+            data-bind="foreach: recentSearches, updateTableEachTimeItChanges:recentSearches">
+          <li>
+            <a data-bind="click: $parent.recentSearchClicked">
+              <span data-bind="text: $data"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ### A page that renders the SearchResultsViewModel -->
+  <div data-role="page" data-theme="b" data-add-back-btn="true"
+       id="searchResultsView">
+    <div data-role="header" data-theme="b">
+      <h1>Results</h1>
+    </div>
+    <div data-role="content" data-theme="c" data-iscroll>
+      <!-- twitter search results -->
+      <ul data-role="listview">
+        <!-- ko foreach: tweets, updateListviewOnChange:tweets -->
+        <li>
+          <a data-bind="click: $parent.tweetClicked">
+            <div class="thumbnail-container">
+              <img data-bind="attr: { src: thumbnail }" />
+            </div>
+            <h3 class="author" data-bind="text: author"></h3>
+            <p class="text" data-bind="text: text"></p>
+          </a>
+        </li>
+         <!-- /ko -->
+        <li>
+          <a data-bind="click: loadMore" href="#">
+            <h3 data-bind="visible: !isSearching()">Load more ...</h3>
+            <h3 data-bind="visible: isSearching()">Loading ...</h3>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ### A page that renders the TweetViewModel -->
+  <div data-role="page" data-theme="b" data-add-back-btn="true"
+       id="tweetView">
+    <div data-role="header" data-theme="b">
+      <h1 data-bind="text: author">
+    </div>
+    <div data-role="content" data-theme="c" class="tweet">
+      <!-- a simple tweet view -->
+      <div class="thumbnailColumn">
+        <img data-bind="attr: { src: thumbnail }" class="thumbnail" />
+      </div>
+      <div class="detailsColumn">
+        <div class="author" data-bind="text: author"></div>
+        <div class="text" data-bind="text: text"></div>
+        <div class="time" data-bind="text: time"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
