@@ -4,7 +4,6 @@ function SearchResultsViewModel() {
   /// <summary>
   /// A view model that renders the results of a twitter search.
   /// </summary>
-  /// <param name="tweetViewModels">An array of TweetViewModel instances</param>
 
   var that = this,
       twitterSearchService = new TwitterSearchService();
@@ -14,7 +13,6 @@ function SearchResultsViewModel() {
   this.template = "searchResultsView";
   this.tweets = ko.observableArray();
   this.isSearching = ko.observable(false);
-  this.tweetArray = [];
   this.pageNumber = ko.observable(1);
   this.searchString = "";
 
