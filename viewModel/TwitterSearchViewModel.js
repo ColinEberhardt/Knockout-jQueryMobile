@@ -42,7 +42,7 @@ function TwitterSearchViewModel() {
       that.recentSearches.unshift(that.searchTerm());
 
       // limit to 5 recent search terms
-      if (that.recentSearches.length > 5) {
+      while (that.recentSearches().length > 5) {
         that.recentSearches.pop();
       }
 
