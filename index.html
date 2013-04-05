@@ -36,10 +36,10 @@
     <div data-role="content" data-theme="c">
       <div>
         <!-- search form -->
-        <form>
+        <form data-bind="submit: search">
           <input type="search" name="search"
                   data-bind="value: searchTerm, valueUpdate: 'afterkeydown'" />
-          <input type="button" value="Go"
+          <input type="submit" value="Go"
                   data-bind="enable: searchTerm().length > 0 && isSearching() == false,
                              click: search" />
         </form>
@@ -53,6 +53,7 @@
         <!-- recent searches -->
         <h3 data-bind="visible: recentSearches().length > 0">Recent Searches</h3>
         <ul data-role="listview"
+            data-inset="true" 
             data-bind="foreach: recentSearches, updateTableEachTimeItChanges:recentSearches">
           <li>
             <a data-bind="click: $parent.recentSearchClicked">
