@@ -1,4 +1,4 @@
-﻿/*globals $, application, ko, localStorage, searchResultsViewModel, TwitterSearchService, TweetViewModel */
+﻿/// <reference path="..\lib\knockout-2.2.0rc.debug.js" />
 
 function TwitterSearchViewModel() {
   /// <summary>
@@ -13,7 +13,7 @@ function TwitterSearchViewModel() {
   this.template = "twitterSearchView";
   this.isSearching = ko.observable(false);
   this.userMessage = ko.observable();
-  this.searchTerm = ko.observable("#wp7dev");
+  this.searchTerm = ko.observable("#knockoutjs");
   this.recentSearches = ko.observableArray();
 
   // --- private functions
