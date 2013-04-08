@@ -1,4 +1,4 @@
-﻿/// <reference path="..\lib\knockout-2.2.0rc.debug.js" />
+﻿/*globals $, application, ko, localStorage, searchResultsViewModel, TwitterSearchService, TweetViewModel */
 
 function TwitterSearchViewModel() {
   /// <summary>
